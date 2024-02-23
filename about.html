@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>About</title>
+
+    <style>
+        /* CSS for modal */
+        .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          background-color: rgba(0,0,0,0.4);
+        }
+    
+        .modal-content {
+          background-color: #fefefe;
+          margin: 15% auto;
+          padding: 20px;
+          border: 1px solid #888;
+          width: 80%;
+          max-width: 400px;
+        }
+    
+        .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+        }
+    
+        .close:hover,
+        .close:focus {
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+        #successMessage {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #8BC34A;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            z-index: 9999;
+        }
+
+        body {
+            justify-content: center;
+            text-align: center;
+        }
+
+        html {
+            max-width: 100%;
+        }
+        
+        header {
+            font-size:30px; 
+            font-weight: bold; 
+        }
+
+        b {
+            color:red; 
+            font-size:12px; 
+            font-weight: bold;
+        }
+
+        label[for="first_name"] {
+            font-size: 14px; font-weight: bold;
+        }
+
+        input[type="text"][id="first_name"] {
+            font-size: 14px; 
+            font-weight: bold;
+        }
+
+        label[for="last_name"] {
+            font-size: 14px; 
+            font-weight: bold;
+        }
+
+        input[type="text"][id="last_name"] {
+            font-size: 14px; 
+            font-weight: bold;
+        }
+
+        label[for="phone_number"] {
+            font-size:12px; 
+        }
+
+        input[type="text"][id="phone_number"] {
+            font-size: 12px;
+        }
+
+        label[for="email"] {
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        input[type="email"][id="email"] {
+            font-size:12px;
+            font-style: italic;
+        }
+            
+        span#emailValidationMessage {
+            color: red; 
+            font-size:12px; 
+            display: none;
+            font-style: italic;
+        }
+
+        span#emailValidMessage {
+            color: green; 
+            font-size:12px; 
+            display: none;
+            font-style: italic;
+        }
+
+        p#email {
+            font-size: 12px; 
+            font-style:italic;
+        }
+
+        label[for="promo_code"] {
+            font-size:12px;
+        }
+
+        input[type="promo_code"][id="promo_code"] {
+            font-size:12px;
+        }
+
+        span#sevenDigitPromoCodeValidationMessage {
+            color: red; 
+            display: none; 
+            font-size:12px;
+        }
+
+        span#alphanumericPromoCodeValidationMessage {
+            color: red; 
+            font-size:12px;
+            display: none;
+        }
+
+        label[for="hear_about_us"] {
+            font-size:12px;
+        }
+
+        select#hear_about_us {
+            font-size:12px;
+        }
+
+        option[value=""] {
+            font-size:12px;
+        }
+
+        option[value="Social Media"] {
+            font-size:12px;
+        }
+
+        option[value="From a Friend"] {
+            font-size:12px;
+        }
+
+        option[value="Email"] {
+            font-size:12px;
+        }
+
+        option[value="Other"] {
+            font-size:12px;
+        }
+
+        div#otherInput {
+            display: none; 
+            font-size:12px;
+        }
+
+        label[for="other_specify"] {
+            font-size:12px;
+        }
+
+        input[type="text"][id="other_specify"] {
+            font-size:12px;
+        }
+
+        span#otherValidationMessage {
+            color: red; 
+            display: none; 
+            font-size:12px;
+        }
+
+        span#hearAboutUsValidationMessage {
+            color: red; display: none; font-size:12px;
+        }
+
+        label {
+            font-size:12px;
+        }
+
+        input[type="checkbox"][id="terms_conditions"] {
+            font-size:12px;
+        }
+
+        a[href="#terms_link"] {
+            font-size:12px;
+        }
+
+        p#modal {
+            font-size:12px;
+        }
+
+        div#successMessage {
+            background-color: #8BC34A; 
+            color: white; 
+            padding: 10px;
+        }
+
+        footer {
+            font-size:18px; 
+            font-weight:bold; 
+            margin-bottom:10px;
+        }
+
+    </style>
+	</head>
+
+    <header><img src="images/header.png" ><br>Contact Details</p></header><br><br>
+
+    <body>
+
+        <form action="/submit_form" method="POST" onsubmit="return validateForm()" id="myForm"></form>
+        <label for="first_name">First Name:<b>*</b></label>
+            <input type="text" id="first_name" name="first_name" maxlength="30" required><br><br>
+
+        <label for="last_name">Last Name:<b>*</b></label>
+            <input type="text" id="last_name" name="last_name" maxlength="30" required><br><br>
+
+        <label for="phone_number">Phone Number:<b>*</b></label>
+            <input type="text" id="phone_number" name="phone_number" maxlength="30" placeholder="Format: 123-456-7890" required><br><br>
+
+        <label for="email">Email Address:<b>*</b></label>
+            <input type="email" id="email" name="email" max-length="50" required><br>
+            <span id="emailValidationMessage">Please enter a valid email address</span>
+            <span id="emailValidMessage">Thank you for entering your email address!</span>
+            <!--Text placed below email field, as instructed to do so per directions-->
+            <!-- Additional Text under the Email Field -->
+            <p id="email">This field is required in order to receive an email confirmation.</p><br>
+
+        <label for="promo_code" style="font-size:12px;">Promo Code:</label>
+            <input type="text" id="promo_code" name="promo_code"> <!--pattern="[A-Za-z0-9]+" title="Please enter alphanumeric characters only"--><br>
+            <span id="sevenDigitPromoCodeValidationMessage">
+                Please enter exactly seven digits for the promo code
+            </span><br>
+            <span id="alphanumericPromoCodeValidationMessage">
+                Please enter alphanumeric characters only for the promo code
+            </span><br><br>
+        <br>
+
+        <label for="hear_about_us">How did you hear about us:</label>
+            <select id="hear_about_us" name="hear_about_us" required onchange="showOtherInput()">
+            <option value="">Please select</option>
+            <option value="Social Media" style="">Social Media</option>
+            <option value="From a Friend" style="font-size:12px;">From a Friend</option>
+            <option value="Email">Email</option>
+            <option value="Other">Other</option>
+        </select><br><br>
+
+        <div id="otherInput">
+            <label for="other_specify">Please specify:</label>
+            <input type="text" id="other_specify" name="other_specify">
+            <span id="otherValidationMessage">
+                    Please enter text in this field
+            </span><br><br>
+        </div>
+            
+        <span id="hearAboutUsValidationMessage">
+                Please select an option if no promo code is entered
+        </span><br><br>
+            
+        <label>
+            <input type="checkbox" id="terms_conditions" name="terms_conditions" style="">
+                I agree to the <a href="#" id="terms_link">terms and conditions</a> of this event.
+            </label><br>
+        <span id="termsValidationMessage" style="color: red; font-size:12px;">Please agree to the terms and conditions</span><br><br>
+          
+        <input type="submit" value="Submit">
+          </form>
+
+          <div id="modal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p id="modal">
+                All cancellation requests must be received by March 1, 2022.<br>
+                All cancellation requests are subject to a $100 cancellation fee.<br>
+                No one under the age of 16 will be allowed on the show floor.
+              </p>
+            </div>
+          </div>
+          <div id="successMessage" style=" ">
+            You have filled in all the fields correctly.
+        </div>
+        <br><br>
+        <footer>For assistance please call 555-5555 or email <a href="mailto:test.com">test@test.com</a></footer>
+
+        <script>
+        // JavaScript for modal
+        const modal = document.getElementById('modal');
+        const termsLink = document.getElementById('terms_link');
+        const closeModal = document.getElementsByClassName('close')[0];
+          
+        // Show modal when terms link is clicked
+        termsLink.onclick = function(event) {
+            event.preventDefault();
+            modal.style.display = 'block';
+        }
+          
+        // Close the modal when the 'x' (close button) is clicked
+        closeModal.onclick = function() {
+            modal.style.display = 'none';
+        }
+          
+        // Close the modal when clicking outside the modal content
+        window.onclick = function(event) {
+            if (event.target === modal) {
+            modal.style.display = 'none';
+            }
+        }
+
+        // JavaScript for allowing only digits in the phone number field
+        const phoneInput = document.getElementById('phone_number');
+
+        phoneInput.addEventListener('input', function(event) {
+            this.value = this.value.replace(/\D/g, ''); // Remove non-numeric characters
+        });
+
+        //validate email code right here
+        const emailField = document.getElementById('email');
+        const emailValidationMessage = document.getElementById('emailValidationMessage');
+
+        emailField.addEventListener('input', function() {
+        const emailValue = emailField.value.trim();
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (emailPattern.test(emailValue)) {
+            emailValidationMessage.style.display = 'none';
+            } else {
+            emailValidationMessage.style.display = 'block';
+            }
+            });
+   
+        //newly added code to try out separation from both red messages
+       /* add this one back if new code does not work
+        document.getElementById("promo_code").addEventListener("input", function(event) {
+    var promo_code = event.target.value.trim();
+    var sevenDigitPromoCodeValidationMessage = document.getElementById("sevenDigitPromoCodeValidationMessage");
+    var hearAboutUsValidationMessage = document.getElementById("hearAboutUsValidationMessage");
+    var hear_about_us = document.getElementById("hear_about_us").value;
+
+    if (promo_code.length === 7) {
+        // Show the seven-digit validation message
+        sevenDigitPromoCodeValidationMessage.style.display = "inline";
+    } else {
+        // Hide the seven-digit validation message if not exactly seven digits
+        sevenDigitPromoCodeValidationMessage.style.display = "none";
+    }
+
+    if (promo_code.length >= 7) {
+        // Hide the red message if promo code is 7 digits or more
+        hearAboutUsValidationMessage.style.display = "none";
+    } else if (promo_code.length < 7 && hear_about_us === "") {
+        // Show the red message if promo code is less than 7 digits and no option selected in hear_about_us
+        hearAboutUsValidationMessage.style.display = "inline";
+    } - eof add back code*/
+    document.getElementById("promo_code").addEventListener("focus", function(event) {
+    var sevenDigitPromoCodeValidationMessage = document.getElementById("sevenDigitPromoCodeValidationMessage");
+    var promo_code = event.target.value.trim();
+
+    if (promo_code.length !== 7) {
+        // Show the red message asking for seven digits when user tabs into the field
+        sevenDigitPromoCodeValidationMessage.style.display = "inline";
+    } else {
+        // Hide the seven-digit validation message if seven digits are already entered
+        sevenDigitPromoCodeValidationMessage.style.display = "none";
+    }
+});
+
+document.getElementById("promo_code").addEventListener("input", function(event) {
+    var promo_code = event.target.value.trim();
+    var sevenDigitPromoCodeValidationMessage = document.getElementById("sevenDigitPromoCodeValidationMessage");
+    var alphanumericPromoCodeValidationMessage = document.getElementById("alphanumericPromoCodeValidationMessage");
+    var hearAboutUsValidationMessage = document.getElementById("hearAboutUsValidationMessage");
+    var hear_about_us = document.getElementById("hear_about_us").value;
+
+    if (promo_code.length === 0) {
+        // If promo code field is empty, display both red messages
+        sevenDigitPromoCodeValidationMessage.style.display = "inline";
+        hearAboutUsValidationMessage.style.display = "inline";
+    } else if (promo_code.length === 7) {
+        // If promo code is exactly seven digits, hide the seven-digit message
+        sevenDigitPromoCodeValidationMessage.style.display = "none";
+    } else {
+        // If promo code is not empty and not seven digits, show the seven-digit message
+        sevenDigitPromoCodeValidationMessage.style.display = "inline";
+    }
+
+    if (!/^[a-zA-Z0-9]*$/.test(promo_code)) {
+        // If promo code contains non-alphanumeric characters, display the alphanumeric message
+        alphanumericPromoCodeValidationMessage.style.display = "inline";
+    } else {
+        // Hide the alphanumeric message if promo code contains only alphanumeric characters
+        alphanumericPromoCodeValidationMessage.style.display = "none";
+    }
+
+    if (promo_code.length >= 7) {
+        // Hide the red message related to hear_about_us if promo code is 7 digits or more
+        hearAboutUsValidationMessage.style.display = "none";
+    } else if (promo_code.length < 7 && hear_about_us === "") {
+        // Show the red message related to hear_about_us if promo code is less than 7 digits and no option selected
+        hearAboutUsValidationMessage.style.display = "inline";
+    }
+    
+        //Add this code back if new one above does not work
+        /*document.getElementById("promo_code").addEventListener("input", function(event) {
+            var promo_code = event.target.value.trim();
+            var sevenDigitPromoCodeValidationMessage = document.getElementById("sevenDigitPromoCodeValidationMessage");
+            var alphanumericPromoCodeValidationMessage = document.getElementById("alphanumericPromoCodeValidationMessage");
+
+        if (promo_code.length !== 7) {
+            sevenDigitPromoCodeValidationMessage.style.display = "inline"; // Show error message for seven digits
+            alphanumericPromoCodeValidationMessage.style.display = "none"; // Hide alphanumeric error message
+        } else if (!/^[a-zA-Z0-9]*$/.test(promo_code)) {
+            sevenDigitPromoCodeValidationMessage.style.display = "none"; // Hide seven digit error message
+            alphanumericPromoCodeValidationMessage.style.display = "inline"; // Show error message for non-alphanumeric characters
+        }*/else {
+            sevenDigitPromoCodeValidationMessage.style.display = "none"; // Hide seven digit error message
+            alphanumericPromoCodeValidationMessage.style.display = "none"; // Hide alphanumeric error message
+            }
+        });
+
+        //More validation code for showOtherInput
+        function showOtherInput() {
+            var selectBox = document.getElementById("hear_about_us");
+            var otherInput = document.getElementById("otherInput");
+
+            if (selectBox.value === "Other") {
+                otherInput.style.display = "block";
+                otherInput.getElementsByTagName("input")[0].setAttribute("required", "required");
+            } else {
+                otherInput.style.display = "none";
+                otherInput.getElementsByTagName("input")[0].removeAttribute("required");
+                document.getElementById("otherValidationMessage").style.display = "none";
+            }
+        }
+
+        //latest one added to be removed if red text does not disappear after entering text
+        document.getElementById("other_specify").addEventListener("input", function(event) {
+            var specifyValue = event.target.value.trim();
+            var otherValidationMessage = document.getElementById("otherValidationMessage");
+
+            if (specifyValue === "") {
+                otherValidationMessage.style.display = "inline"; // Show error message
+            } else {
+                otherValidationMessage.style.display = "none"; // Hide error message
+            }
+        });
+
+        //validation message for please specify
+        document.getElementById("other_specify").addEventListener("focus", function(event) {
+            var specifyValue = event.target.value.trim();
+            var otherValidationMessage = document.getElementById("otherValidationMessage");
+
+        if (specifyValue === "") {
+            otherValidationMessage.style.display = "inline"; // Show error message
+            }
+        });
+
+        //Validation message if Terms and Conditions box is not checked
+        document.getElementById("terms_conditions").addEventListener("change", function(event) {
+            var isChecked = event.target.checked;
+            var termsValidationMessage = document.getElementById("termsValidationMessage");
+
+        if (!isChecked) {
+            termsValidationMessage.style.display = "inline"; // Show error message
+        } else {
+            termsValidationMessage.style.display = "none"; // Hide error message
+            }
+        });
+
+        //More validation code for terms and condtions box to be checked
+        document.getElementById("other_specify").addEventListener("input", function(event) {
+            var specifyValue = event.target.value.trim();
+            var otherValidationMessage = document.getElementById("otherValidationMessage");
+
+        if (specifyValue === "") {
+            otherValidationMessage.style.display = "inline"; // Show error message
+        } else {
+            otherValidationMessage.style.display = "none"; // Hide error message
+            }
+        });
+
+        // Validate on form submission
+        document.getElementById("myForm").addEventListener("submit", function(event) {
+            var specifyValue = document.getElementById("other_specify").value.trim();
+            var otherValidationMessage = document.getElementById("otherValidationMessage");
+            var isChecked = document.getElementById("terms_conditions").checked;
+            var termsValidationMessage = document.getElementById("termsValidationMessage");
+
+        // Validate "Please specify" field
+        if (specifyValue === "") {
+            otherValidationMessage.style.display = "inline"; // Show error message
+        } else {
+            otherValidationMessage.style.display = "none"; // Hide error message
+        }
+
+        // Validate "Terms and Conditions" checkbox
+        if (!isChecked) {
+            termsValidationMessage.style.display = "inline"; // Show error message
+            event.preventDefault(); // Prevent form submission
+        } else {
+            termsValidationMessage.style.display = "none"; // Hide error message
+            }
+        });
+
+        //Alphanumeric promo code validation
+        document.getElementById("promo_code").addEventListener("input", function(event) {
+            var promo_code = event.target.value.trim();
+            var alphanumericPromoCodeValidationMessage = document.getElementById("alphanumericPromoCodeValidationMessage");
+
+        if (promo_code !== "" && !/^[a-zA-Z0-9]+$/.test(promo_code)) {
+            alphanumericPromoCodeValidationMessage.style.display = "inline"; // Show error message
+        } else {
+            alphanumericPromoCodeValidationMessage.style.display = "none"; // Hide error message
+            }
+        });
+    
+        //Format phone number
+        function formatPhoneNumber() {
+            var phoneNumber = document.getElementById("phone_number");
+            phoneNumber.addEventListener("input", function (e) {
+            var trimmedValue = phoneNumber.value.replace(/\D/g, '');
+            var formattedNumber = '';
+            if (trimmedValue.length > 0) {
+                formattedNumber = trimmedValue.substring(0, 3);
+                if (trimmedValue.length > 3) {
+                    formattedNumber += '-' + trimmedValue.substring(3, 6);
+                }
+                if (trimmedValue.length > 6) {
+                    formattedNumber += '-' + trimmedValue.substring(6, 10);
+                }
+            }
+            phoneNumber.value = formattedNumber;
+            });
+        }
+    
+        formatPhoneNumber();
+
+        //new validation
+        function checkAllFields() {
+            var fields = [
+                "first_name",
+                "last_name",
+                "phone_number",
+                "email",
+                "promo_code",
+                "hear_about_us",
+                "terms_conditions"
+            ];
+
+        var allFilled = fields.every(function(field) {
+            if (field === "terms_conditions") {
+                return document.getElementById(field).checked;
+            }
+            return document.getElementById(field).value.trim() !== "";
+        });
+
+        if (allFilled) {
+            document.getElementById("successMessage").style.display = "block";
+        } else {
+            document.getElementById("successMessage").style.display = "none";
+            }
+        }
+
+        // Add event listeners to input fields to check when they change
+        document.querySelectorAll('input, select').forEach(function(element) {
+            element.addEventListener('change', checkAllFields);
+        });
+
+        // Add event listener to the form submit button to prevent default form submission
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            var allFieldsFilled = checkAllFields(); // Check again before submitting
+        if (!allFieldsFilled) {
+            event.preventDefault(); // Prevent form submission if fields are not filled
+            }
+        });
+
+        //New promo code validaiton code
+        var promoCodeInput = document.getElementById('promo_code');
+        var hearAboutUsValidationMessage = document.getElementById('hearAboutUsValidationMessage');
+
+        // Add an event listener to the promo code input field for the blur event
+        promoCodeInput.addEventListener('blur', function() {
+        // Check if the promo code field is empty when it loses focus
+        if (promoCodeInput.value.trim() === "") {
+            hearAboutUsValidationMessage.style.display = 'inline'; // Show the red message
+        } else {
+            hearAboutUsValidationMessage.style.display = 'none'; // Hide the red message
+            }
+        });
+
+        //Email validation
+        document.getElementById("email").addEventListener("input", function(event) {
+            var emailField = event.target;
+            var emailValidationMessage = document.getElementById("emailValidationMessage");
+         var emailValidMessage = document.getElementById("emailValidMessage");
+            var emailValue = emailField.value.trim();
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (emailPattern.test(emailValue)) {
+               emailValidationMessage.style.display = "none";
+                emailValidMessage.style.display = "inline";
+        } else {
+            emailValidationMessage.style.display = "inline";
+            emailValidMessage.style.display = "none";
+            }
+        });
+
+    </script>
+    </body>
+
+
+    </html>
